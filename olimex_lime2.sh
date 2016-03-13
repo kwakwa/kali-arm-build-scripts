@@ -188,7 +188,7 @@ EOF
 # Kernel section.  If you want to us ea custom kernel, or configuration, replace
 # them in this section.
 # Get, compile and install kernel
-git clone --depth 1 https://github.com/linux-sunxi/u-boot-sunxi
+git clone --depth 1 git://git.denx.de/u-boot.git -b v2015.10
 git clone --depth 1 https://github.com/linux-sunxi/linux-sunxi -b stage/sunxi-3.4 ${basedir}/root/usr/src/kernel
 git clone --depth 1 https://github.com/linux-sunxi/sunxi-tools
 git clone --depth 1 https://github.com/linux-sunxi/sunxi-boards
@@ -225,10 +225,12 @@ EOF
 # Create u-boot boot script image
 mkimage -A arm -T script -C none -d ${basedir}/bootp/boot.cmd ${basedir}/bootp/boot.scr
 
-cd ${basedir}/u-boot-sunxi/
+cd ${basedir}/u-boot/
 # Build u-boot
 make distclean
 make A20-OLinuXino-Lime2_defconfig 
+echo "CONFIG_ARMV7_BOOT_SEC_DEFAULT=y" >> .config
+echo "CONFIG_OLD_SUNXI_KERNEL_COMPAT=y" >> .config
 make -j $(grep -c processor /proc/cpuinfo)
 
 dd if=u-boot-sunxi-with-spl.bin of=$loopdevice bs=1024 seek=8
