@@ -175,7 +175,7 @@ rsync -HPavz -q ${basedir}/kali-$architecture/ ${basedir}/root/
 # Enable the serial console
 echo "T1:12345:respawn:/sbin/agetty -L ttyS0 115200 vt100" >> ${basedir}/root/etc/inittab
 # Load the ethernet module since it doesn't load automatically at boot.
-echo "sunxi_emac" >> ${basedir}/root/etc/modules
+echo "sunxi_gmac" >> ${basedir}/root/etc/modules
 
 cat << EOF > ${basedir}/root/etc/apt/sources.list
 deb http://http.kali.org/kali kali-rolling main non-free contrib
