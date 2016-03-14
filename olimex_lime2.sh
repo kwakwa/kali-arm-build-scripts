@@ -195,7 +195,7 @@ git clone --depth 1 https://github.com/linux-sunxi/sunxi-boards
 
 cd ${basedir}/sunxi-tools
 make fex2bin
-./fex2bin ${basedir}/sunxi-boards/sys_config/a20/a20-olinuxino_lime.fex ${basedir}/bootp/script.bin
+./fex2bin ${basedir}/sunxi-boards/sys_config/a20/a20-olinuxino_lime2.fex ${basedir}/bootp/script.bin
 
 cd ${basedir}/root/usr/src/kernel
 git rev-parse HEAD > ../kernel-at-commit
