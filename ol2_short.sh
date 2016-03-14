@@ -78,7 +78,7 @@ rsync -HPavz -q ${basedir}/kali-$architecture/ ${basedir}/root/
 # Enable the serial console
 echo "T1:12345:respawn:/sbin/agetty -L ttyS0 115200 vt100" >> ${basedir}/root/etc/inittab
 # Load the ethernet module since it doesn't load automatically at boot.
-echo "sunxi_emac" >> ${basedir}/root/etc/modules
+echo "sunxi_gmac" >> ${basedir}/root/etc/modules
 
 cat << EOF > ${basedir}/root/etc/apt/sources.list
 deb http://http.kali.org/kali kali-rolling main non-free contrib
@@ -91,6 +91,12 @@ EOF
 # Kernel section.  If you want to us ea custom kernel, or configuration, replace
 # them in this section.
 # Get, compile and install kernel
+
+rm -rf u-boot
+rm -rf linux-s
+rm -rf sunxi-tools
+rm -rf sunxi-boards
+
 git clone --depth 1 git://git.denx.de/u-boot.git -b v2015.10
 git clone --depth 1 https://github.com/linux-sunxi/linux-sunxi -b stage/sunxi-3.4 ${basedir}/root/usr/src/kernel
 git clone --depth 1 https://github.com/linux-sunxi/sunxi-tools
